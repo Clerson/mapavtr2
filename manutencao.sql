@@ -1,0 +1,105 @@
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+CREATE DATABASE IF NOT EXISTS `mapavtr` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `mapavtr`;
+
+CREATE TABLE IF NOT EXISTS `manut` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `data` date DEFAULT NULL,
+  `idvtr` varchar(5) NOT NULL,
+  `tipoid` varchar(5) NOT NULL,
+  `odom` varchar(15) DEFAULT NULL,
+  `vencim` date DEFAULT NULL COMMENT 'tempo para próxiima manutenção',
+  `proxodom` varchar(10) DEFAULT NULL,
+  `respons` varchar(200) DEFAULT NULL,
+  `observ` text,
+  `status` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+DELETE FROM `manut`;
+/*!40000 ALTER TABLE `manut` DISABLE KEYS */;
+INSERT INTO `manut` (`id`, `data`, `idvtr`, `tipoid`, `odom`, `vencim`, `proxodom`, `respons`, `observ`, `status`) VALUES
+	(89, '2022-07-23', '41', '5', '6666', '2022-07-13', '6666', 'eu', 'teste teste', 'p'),
+	(83, '2022-07-01', '29', '2', '55555', '2022-07-15', '55555', 'Eu', 'testset', 'fechada'),
+	(84, '2022-07-01', '29', '3', '55555', '2022-07-15', '55555', 'Eu', 'etsetsete', 'aberta'),
+	(85, '2022-07-01', '29', '2', '55555', '2022-07-15', '55555', 'Eu', 'sasasdfad', 'ativa'),
+	(86, '2022-07-01', '29', '2', '55555', '2022-07-15', '55555', 'Eu', 'sddddd', 'ativa'),
+	(87, '2022-07-01', '29', '2', '55555', '2022-07-15', '55555', 'Eu', 'seeeee', 'ativa'),
+	(88, '2022-07-01', '29', '2', '55555', '2022-07-15', '55555', 'Eu', 'eeee', 'ativa'),
+	(90, '2022-07-01', '38', '2', '44444', '2022-07-14', '444444', 'eu', 'tetse', 'aberta'),
+	(91, '2022-07-01', '38', '5', '5555', '2022-07-20', '5555', 'asdfasdfa', 'asdfasdf asdf', 'ativa'),
+	(92, '2022-07-01', '38', '2', '8888', '2022-07-08', '8888', 'dfghdfg', 'dfghdfgh', 'ativa'),
+	(93, '2022-07-01', '29', '2', '888', '2022-07-23', '8888', 'asdfasdf', 'asdfasdf', 'fechada'),
+	(94, '2022-07-01', '38', '2', '54564', '2022-07-23', '345345', 'edadsfg', 'sdfgsdfg', 'ativa'),
+	(95, '2022-07-01', '38', '2', '54564', '2022-07-23', '345345', 'edadsfg', 'sdfgsdfg', 'ativa'),
+	(96, '2022-07-04', '38', '2', '342342', '2022-07-13', '234234', 'asdfasd', 'asdfasdf', 'p'),
+	(97, '2022-07-01', '29', '2', '342342', '2022-07-13', '234234', 'asdfasd', 'asdfasdf', 'fechada'),
+	(98, '2022-07-01', '29', '3', '345345', '2022-07-01', '345345', 'asdfasd', 'asdfasdf', 'fechada'),
+	(99, '2022-07-01', '38', '2', '345345', '2022-07-01', '345345', 'asdfasd', 'asdfasdf', 'ativa'),
+	(100, '2022-07-23', '3', '2', '3234', '2022-07-01', '234234', 'asdfasdf', 'asdasd', 'c'),
+	(108, '2022-07-23', '41', '5', '22745', NULL, NULL, '', '', 'c'),
+	(109, '2022-07-23', '3', '3', '104954', NULL, NULL, '', '', 'p'),
+	(107, '2022-07-03', '3', '2', '104954', '2022-07-13', '22222', 'eu', 'asdfasd', 'a'),
+	(104, '2022-07-07', '3', '3', '345345', '2022-07-01', '345345', 'adsasdf', 'asdfasdf', 'c'),
+	(105, '2022-07-23', '41', '3', '345345', '2022-07-01', '345345', 'asdasdf', 'asdfasdf', 'a'),
+	(106, '2022-07-01', '29', '2', '345345', '2022-07-01', '34535', 'ASDFASDF', 'ASDFASDF', 'fechada');
+/*!40000 ALTER TABLE `manut` ENABLE KEYS */;
+
+CREATE TABLE IF NOT EXISTS `manut_det` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `manutid` int(11) DEFAULT NULL,
+  `manut_tipo_id` int(11) unsigned DEFAULT NULL,
+  `item` int(11) unsigned DEFAULT NULL,
+  `qnt` varchar(5) DEFAULT NULL,
+  `unid` varchar(30) DEFAULT NULL,
+  `valor` double(10,2) unsigned DEFAULT NULL,
+  `valor_total` double(10,2) unsigned DEFAULT NULL,
+  `observ` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+DELETE FROM `manut_det`;
+/*!40000 ALTER TABLE `manut_det` DISABLE KEYS */;
+INSERT INTO `manut_det` (`id`, `manutid`, `manut_tipo_id`, `item`, `qnt`, `unid`, `valor`, `valor_total`, `observ`) VALUES
+	(1, 3, NULL, NULL, NULL, NULL, NULL, NULL, ''),
+	(2, 100, 3, NULL, NULL, NULL, NULL, NULL, 'teste'),
+	(3, 100, 2, NULL, NULL, NULL, NULL, NULL, 'testet'),
+	(4, 100, 7, NULL, NULL, NULL, NULL, NULL, 'testet'),
+	(5, 100, 7, NULL, NULL, NULL, NULL, NULL, 'testet'),
+	(6, 107, 7, NULL, NULL, NULL, NULL, NULL, ''),
+	(7, 107, 8, NULL, NULL, NULL, NULL, NULL, 'teste'),
+	(8, 104, 5, NULL, NULL, NULL, NULL, NULL, ''),
+	(9, 104, 6, NULL, NULL, NULL, NULL, NULL, 'dddd'),
+	(10, 109, 3, NULL, NULL, NULL, NULL, NULL, ''),
+	(11, 90, 5, NULL, NULL, NULL, NULL, NULL, '');
+/*!40000 ALTER TABLE `manut_det` ENABLE KEYS */;
+
+CREATE TABLE IF NOT EXISTS `manut_tipo` (
+  `vtrmantipo_id` int(11) NOT NULL AUTO_INCREMENT,
+  `vtrmanparte` varchar(50) NOT NULL,
+  `vtrmantipo` varchar(50) NOT NULL,
+  PRIMARY KEY (`vtrmantipo_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+DELETE FROM `manut_tipo`;
+/*!40000 ALTER TABLE `manut_tipo` DISABLE KEYS */;
+INSERT INTO `manut_tipo` (`vtrmantipo_id`, `vtrmanparte`, `vtrmantipo`) VALUES
+	(1, 'Mecanica', 'Abastecimento'),
+	(2, 'Mecanica', 'Troca de oleo carter'),
+	(3, 'Hidraulica', 'Troca de correia dentada'),
+	(5, 'Eletrica', 'Abastecimento'),
+	(6, 'Lataria', 'Troca filtro combustivel'),
+	(7, 'Pneus', 'Troca filtro de ar'),
+	(8, 'Suspensao', 'Fluido de freios');
+/*!40000 ALTER TABLE `manut_tipo` ENABLE KEYS */;
+
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
