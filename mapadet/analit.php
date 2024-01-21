@@ -1,4 +1,4 @@
-    <div class="col-sm-3 p-1 list-group" style="height:470px; overflow-y: scroll">
+    <div class="col-sm-3 p-1 list-group" style="min-height:470px; overflow-y: scroll">
     <?php
  
     if(!empty($_GET['idvtr'])) {
@@ -64,8 +64,7 @@
             <img  src="../veiculos/vtrimg/<?=$vtrimg?>" width="60">
             <h6><?=$vtrtipo;?></h6>
             <span><?=$status;?></span>
-            <img  src="../pessoas/pessoas_img/<?=$pessoaimg; ?>" class="rounded-2" width="28" height="32">
-
+            <img  src="../pessoas/pessoas_img/<?=$pessoaimg; ?>" class="rounded-2" width="28" height="32" >
           </div>
          </a>
        </div>

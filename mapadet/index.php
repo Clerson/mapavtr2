@@ -133,7 +133,7 @@ do {
 
 if($result_detmapa->num_rows > 0) {
 
-echo "<div class='row'>";
+echo "<div class='row' style='min-height:500px'>";
   
 
       if(!empty($_GET['idvtr'])) { include_once "analit.php"; };

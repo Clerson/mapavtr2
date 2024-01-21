@@ -105,7 +105,7 @@ if(!empty($_GET['iddetmp'])) {
             <label for='idvtr'>Veículo:</label>
           </div>
 
-          <div class="form-floating p-0" style="width: 46px" id="img">
+          <div class="form-floating p-0 shadow-sm" style="width: 46px" id="img">
             <img src="../pessoas/pessoas_img/<?=$pessoaimg?>" class='rounded-2' width='46' height="56" alt="<?=$nomeguerra;?>">
           </div>
           <div class='form-floating col-sm' id="pessoa">

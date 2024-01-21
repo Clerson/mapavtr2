@@ -11,16 +11,22 @@
 <link rel="icon" type="image/x-icon" href="../img/9bbm.png">
 <link rel="stylesheet" type="text/css" href="../css/index.css">
 </head>
+<script>
+var h = window.innerHeight;
+</script>
+<style type="text/css">
+  .full-height = var;
+</style>
 
 <body class="bg-light">
 
-  <div class="container-fluid">
+  <div class="container-fluid" id="container" >
 
     <div class="row">
 
-      <div class="col-sm-2 p-0" >
+      <div class="col-sm-2 bg-secondary" >
 
-        <nav class="navbar navbar-expand-sm bg-secondary navbar-dark  p-0">
+        <nav class="navbar navbar-expand-sm navbar-dark  p-0">
           <div class="container-fluid">
 <!--             <a class="navbar-brand" href="#">
               <img src="../img/9bbm.png" alt="Logo" height="30" width="30" class="rounded-pill p-0"> 
