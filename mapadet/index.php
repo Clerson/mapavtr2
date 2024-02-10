@@ -4,30 +4,41 @@ require_once '../conexao.php';
 
 
 $idmapa = $_GET['idmapa'];
-$sql_detmapa = "SELECT idvtr FROM detmapa WHERE idmapa=$idmapa GROUP BY idvtr ";  
-$result_detmapa = $conn->query($sql_detmapa);  
+
+// SELECIONA OS REGISTROS EM DETMAPA, AGRUPADOS POR VTR, FILTRADO PELO IDMAPA
+
+$result_detmapa = $conn->query("
+                              SELECT idvtr,
+                                     vtrid, 
+                                     vtrimg, 
+                                     vtrtipo  
+                              FROM detmapa
+                              INNER JOIN vtr ON vtrid=idvtr 
+                              WHERE idmapa=$idmapa 
+                              GROUP BY idvtr 
+                              ");
+
 $row_detmapa = $result_detmapa->fetch_assoc(); 
 
 if ($result_detmapa->num_rows > 0) {
   
 echo "<div>";
 
-do {
+// MOSTRA OS REGISTROS DE DETMAPA, COM OS DADOS DA VTR
+
+    do {
 
     $idvtr = $row_detmapa['idvtr'];
-    $sql = "SELECT vtrid, vtrimg, vtrtipo FROM vtr WHERE vtrid=$idvtr";  
-    $res = $conn->query($sql);  
-    $row = $res->fetch_assoc();
-
-      $id = $row['vtrid'];
-      $img =  $row['vtrimg'];
-      $tipo = $row['vtrtipo'];
+    $img = $row_detmapa['vtrimg'];
+    $tipo = $row_detmapa['vtrtipo'];
 
   ;?>
 
   <div class="list-group list-group-flush">
     <a href='?idmapa=<?=$idmapa;?>&idvtr=<?=$idvtr;?>' class="list-group-item list-group-item-action
-      <?php if((isset($_GET['idvtr'])) && $_GET['idvtr'] == $idvtr) { echo "active";};?>
+      <?php 
+      if((isset($_GET['idvtr'])) && $_GET['idvtr'] == $idvtr) echo "active"
+      ;?>
       " >
       <div class="d-flex justify-content-between">
         <img src='../veiculos/vtrimg/<?=$img;?>' width="50" >
@@ -42,6 +53,8 @@ do {
 };
 
   echo "</div>";
+
+  ///////////////////////// SEGUNDA COLUNA
       
     $sql = "SELECT * FROM mapas WHERE idmapa = $idmapa";
     $res = $conn->query($sql);
@@ -95,36 +108,66 @@ do {
   <div class="container-fluid mb-1">
 
     <?php
-    $sql_rel = "SELECT destino, count(*) AS qnt  FROM detmapa WHERE idmapa = $idmapa GROUP BY destino ORDER BY qnt DESC";
-    $res_rel = $conn->query($sql_rel);
+    $res_rel = $conn->query("
+                              SELECT destino, count(*) AS qnt  
+                              FROM detmapa 
+                              WHERE idmapa = $idmapa 
+                              GROUP BY destino 
+                              ORDER BY qnt 
+                              DESC
+                              ");
+
     $row_rel = $res_rel->fetch_assoc();
     
 
     if($res_rel->num_rows > 0) { 
 
-     do {  $qnt_rel = $row_rel['qnt']; ?>
+     do {  
 
-        <a href="?idmapa=<?=$idmapa;?>&dest=<?=$row_rel['destino'];?>">
-          <span class="badge rounded-pill bg-info text-dark"><?=$row_rel['destino'];?> <span class="badge bg-primary"><?=$qnt_rel;?></span></span>
+          $qnt_rel = $row_rel['qnt']; 
+          $destino = $row_rel['destino'];
+      ?>
+
+        <a href="?idmapa=<?=$idmapa;?>&dest=<?=$destino;?>">
+          <span class="badge rounded-pill bg-info text-dark">
+            <?=$destino;?> 
+            <span class="badge bg-primary"><?=$qnt_rel;?></span>
+          </span>
         </a>
 
-    <?php } while ($row_rel = $res_rel->fetch_assoc());
+      <?php } while ($row_rel = $res_rel->fetch_assoc());
 
     };
 
-      $sql_status = "SELECT detmp_status, count(*) AS qnt  FROM detmapa WHERE idmapa = $idmapa AND detmp_status = 'aberta'  GROUP BY detmp_status";
-      $res_status = $conn->query($sql_status);
+      $res_status = $conn->query("
+                                  SELECT detmp_status, count(*) AS qnt  
+                                  FROM detmapa 
+                                  WHERE idmapa = $idmapa 
+                                  GROUP BY detmp_status
+                                ");
+
       $row_status = $res_status->fetch_assoc();
       $num_status = $res_status->num_rows;
 
       if($res_status->num_rows > 0) { 
         
-     do {  $qnt_status = $row_status['qnt']; ?>
+     do {  
+          $qnt_status = $row_status['qnt']; 
+          $detmp_status = $row_status['detmp_status'];
+    
+      ?>
 
-          <a href="?idmapa=<?=$idmapa;?>&status=<?=$row_status['detmp_status'];?>">
-            <span class="badge rounded-pill bg-warning text-dark"><?=$row_status['detmp_status'];?> <span class="badge bg-primary"><?=$qnt_status;?></span></span>
+          <a href="?idmapa=<?=$idmapa;?>&status=<?=$detmp_status;?>">
+            <span class="badge rounded-pill 
+            <?php if($detmp_status == "QRV") echo "bg-success text-light"; else echo "bg-warning text-dark" ?>
+
+
+            ">
+              <?=$detmp_status;?> 
+              <span class="badge bg-primary"><?=$qnt_status;?></span>
+            </span>
           </a>
-    <?php } while ($row_rel = $res_rel->fetch_assoc()); 
+    <?php } while ($row_status = $res_status->fetch_assoc()); 
 
       };
 
