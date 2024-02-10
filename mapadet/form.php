@@ -66,7 +66,8 @@ if(!empty($_GET['iddetmp'])) {
   if(isset($_GET['pessoaimg'])) $pessoaimg = $_GET['pessoaimg'];
   if(isset($_GET['vtrimg'])) $vtrimg = $_GET['vtrimg'];    
   if(isset($_GET['odomsaida'])) $odomsaida = $_GET['odomsaida'];
-  if(isset($_GET['odomsaida'])) $odomentr = $_GET['odomsaida']; 
+  if(isset($_GET['odomsaida'])) $odomentr = $_GET['odomsaida'];
+  if(isset($_GET['det_status'])) $status = $_GET['det_status'];  
 
 ;?>
 
@@ -170,6 +171,7 @@ if(!empty($_GET['iddetmp'])) {
           <select class="form-select shadow-sm" name="status" id="status" onchange="mudaCorStatus(this.value)" required>
             <option value='aberta' <?php if($status == 'aberta') echo 'selected';?>>Aberta</option>
             <option value='fechada' <?php if($status == 'fechada') echo 'selected';?>>Fechada</option>
+            <option value='QRV' <?php if($status == 'QRV') echo 'selected';?>>QRV</option>
             <option value='cancelada' <?php if($status == 'cancelada') echo 'selected';?>>Cancelada</option>
           </select>
           <label for="status">Status:</label>

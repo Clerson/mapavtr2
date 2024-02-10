@@ -11,12 +11,6 @@
 <link rel="icon" type="image/x-icon" href="../img/9bbm.png">
 <link rel="stylesheet" type="text/css" href="../css/index.css">
 </head>
-<script>
-var h = window.innerHeight;
-</script>
-<style type="text/css">
-  .full-height = var;
-</style>
 
 <body class="bg-light">
 
