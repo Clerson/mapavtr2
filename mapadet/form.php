@@ -138,10 +138,11 @@ if(!empty($_GET['iddetmp'])) {
           <div class="input-group">
             <span class="input-group-text"><i class='far fa-hourglass'></i></span>
             <span class="input-group-text">Hora saída:</span>
-            <input type="time" class="form-control shadow-sm" name="horasaida"  value="<?=$horasaida;?>" required>
+            <input type="time" id="horasaida" class="form-control shadow-sm" name="horasaida"  value="<?=$horasaida;?>" required>
+            <button type="button" class="btn btn-info" onclick="atualizaHoraSaida()" title="Atualiza hora saída"><i class='far fa-hourglass'></i></button>
             <span class="input-group-text">Hora chegada:</span>
             <input type="time" id="horaentr" class="form-control shadow-sm"  name="horaentr" value="<?=$horaentr;?>" required>
-            <button type="button" class="btn btn-info" onclick="atualizaHoraChegada()"><i class='far fa-hourglass'></i></button>
+            <button type="button" class="btn btn-info" onclick="atualizaHoraChegada()"  title="Atualiza hora chegada"><i class='far fa-hourglass'></i></button>
           </div>
           <div class="col-sm form-floating"> 
             <select class="form-select shadow-sm" name="destino" id="destino" onchange="mostrarCampoNumRai(this.value)"  required>
@@ -204,6 +205,15 @@ function atualizaHoraChegada() {
    document.getElementById("horaentr").value = currentHours + ":" + currentMins;
    document.getElementById("status").value = 'fechada';
    document.getElementById("status").style.background = '';
+ };
+
+ function atualizaHoraSaida() {  
+    var d = new Date();
+    var currentHours = d.getHours();
+    var currentMins = d.getMinutes();
+    currentHours = ("0" + currentHours).slice(-2);
+    currentMins = ("0" + currentMins).slice(-2);
+   document.getElementById("horasaida").value = currentHours + ":" + currentMins;
  };
 
  if (document.getElementById("status").value == 'aberta') {
